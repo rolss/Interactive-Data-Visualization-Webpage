@@ -4,6 +4,7 @@ import streamlit as st
 import mysql.connector
 import pandas as pd
 import plotly.express as px
+import sqlite3
 
 # Transforms a list from a list of tuples to a list of elements
 def formateo(lista):
@@ -22,7 +23,7 @@ st.set_page_config(page_title="Pre-betting Analysis",
 # CONNECTION WITH SQL ------------------------------------------------------------------------------
 @st.cache_resource
 def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
+    return sqlite3.connect("futbol.db", check_same_thread=False)
 
 conn = init_connection()
 
@@ -30,9 +31,9 @@ conn = init_connection()
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
 @st.cache_data(ttl=600)
 def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+    cur = conn.cursor()
+    cur.execute(query)
+    return cur.fetchall()
 # --------------------------------------------------------------------------------------------------
 
 st.title("Soccer Analytics")
