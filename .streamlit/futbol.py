@@ -20,7 +20,7 @@ st.set_page_config(page_title="Pre-betting Analysis",
                     layout="wide")
 
 # CONNECTION WITH SQL ------------------------------------------------------------------------------
-@st.experimental_singleton
+@st.cache_resource
 def init_connection():
     return mysql.connector.connect(**st.secrets["mysql"])
 
@@ -28,7 +28,7 @@ conn = init_connection()
 
 # Perform query.
 # Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-@st.experimental_memo(ttl=600)
+@st.cache_data(ttl=600)
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
@@ -326,3 +326,4 @@ with row6_2:
     st.markdown("[![Foo](https://pbs.twimg.com/profile_images/1245303968709971970/Q-NmYnxm_400x400.jpg)](https://www.codere.com.co/)")
 with row6_3:
     st.markdown("[![Foo](https://pbs.twimg.com/profile_images/1465304950498594826/FCDFw48u_400x400.jpg)](https://www.luckia.co/)")
+
