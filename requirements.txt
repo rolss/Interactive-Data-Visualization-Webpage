@@ -1,6 +1,7 @@
 numpy
 streamlit
 mysql.connector
+mysql-connector-python
 pandas
 plotly
 sqlite3
