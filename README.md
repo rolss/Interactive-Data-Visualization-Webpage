@@ -1,7 +1,7 @@
 # Soccer Analytics 📈
 
 ## Description 📌
-Web application that acts as a data dashboard for multiple soccer datasets. Made using Streamlit. The graphs are made with Plotly and change dynamically based on user-selected options, which trigger corresponding SQL queries.
+Web application that acts as a data dashboard for multiple soccer datasets. Made using Streamlit. The graphs are made with Plotly and change dynamically based on user-selected options, which trigger dynamic SQL queries.
 
 <br>
 
